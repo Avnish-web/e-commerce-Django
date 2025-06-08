@@ -1,77 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | Ecommerce</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Login Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --primary-color: #512da8;
+      --gradient-bg: linear-gradient(to right, #e2e2e2, #c9d6ff);
+      --toggle-gradient: linear-gradient(to right, #5c6bc0, #512da8);
+      --input-bg: #eee;
+      --text-dark: #333;
+      --gradient-bg: linear-gradient(to right, #f8cdda, #1d2b64);
+
+
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
     body {
-      background: #f4f6f8;
+      background: var(--gradient-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
-    .login-card {
-      max-width: 450px;
-      margin: 60px auto;
-      padding: 30px;
-      border-radius: 15px;
-      background-color: white;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+    .container {
+      background: #fff;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+      width: 786px;
+      max-width: 100%;
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
     }
-    h1 span {
-      color: green;
+
+    .form-container {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 40px;
+      transition: 0.6s ease-in-out;
     }
-    .btn-custom {
-      background-color: #28a745;
-      color: white;
-      font-weight: bold;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
     }
-    .btn-custom:hover {
-      background-color: #218838;
+
+    input {
+      background: var(--input-bg);
+      border: none;
+      padding: 10px 15px;
+      margin: 8px 0;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
     }
-    a {
+
+    button {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 10px 45px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    button.hidden {
+      background: transparent;
+      border: 1px solid #fff;
+    }
+
+    .social-icon {
+      margin: 20px 0;
+      display: flex;
+      margin-left: 38px ;
+      gap: 10px;
+    }
+
+    .social-icon a {
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      color: var(--text-dark);
+      transition: 0.3s ease;
+    }
+
+    .social-icon a:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .sign-in { left: 0; z-index: 2; }
+    .sign-up { left: 0; opacity: 0; z-index: 1; }
+
+    .container.active .sign-up {
+      transform: translateX(100%);
+      opacity: 1;
+      z-index: 5;
+      animation: fadeIn 0.6s forwards;
+    }
+
+    .container.active .sign-in {
+      transform: translateX(100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .toggle-container {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      transition: 0.6s ease-in-out;
+      border-radius: 150px 0 0 100px;
+      z-index: 1000;
+    }
+
+    .container.active .toggle-container {
+      transform: translateX(-100%);
+      border-radius: 0 150px 0 100px;
+    }
+
+    .toggle {
+      background: var(--toggle-gradient);
+      color: #fff;
+      position: relative;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      transform: translateX(0);
+      transition: 0.6s ease-in-out;
+    }
+
+    .container.active .toggle {
+      transform: translateX(50%);
+    }
+
+    .toggle-panel {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 30px;
+      text-align: center;
+      transition: 0.6s ease-in-out;
+    }
+
+    .toggle-left {
+      left: 0;
+      transform: translateX(-200%);
+    }
+
+    .container.active .toggle-left {
+      transform: translateX(0);
+    }
+
+    .toggle-right {
+      right: 0;
+      transform: translateX(0);
+    }
+
+    .container.active .toggle-right {
+      transform: translateX(200%);
+    }
+
+    h1{
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    h2{
+       text-align: center;
+    }
+
+    h5{
+        text-align: center;
+        font-size: 35px;
+        color: #512da8;
+    }
+
+    h4 {
+      font-size: 25px;
+      margin-bottom: 1px;
+      text-align: center;
+    }
+
+    span, a {
+      font-size: 13px;
+      color: var(--text-dark);
+      margin-top: 10px;
+      text-align: center;
       text-decoration: none;
     }
-    .register-link {
-      margin-top: 15px;
+
+    .alert {
+      color: red;
+      font-size: 13px;
+      margin: 10px 0;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <div class="login-card">
-      <h1 class="text-center mb-4"><span>Ecommerce</span></h1>
-      <h3 class="text-center">Login</h3>
-      <hr>
-
-      {% if messages %}
-        <div class="alert alert-warning" role="alert">
-          {% for message in messages %}
-            {{ message }}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      <form method="post">
+  <main class="container" id="container">
+    <!-- Sign-Up -->
+    <div class="form-container sign-up">
+      <form method="post" action="{% url 'cart:register' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required>
+        <h4>CREATE ACCOUNT</h4>
+        {% if messages %}
+        <div class="alert">
+          {% for message in messages %}{{ message }}{% endfor %}
         </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
+        {% endif %}
+        <div class="social-icon">
+          <a href="#"><i class="fab fa-google"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
         </div>
-
-        <button type="submit" class="btn btn-custom w-100">Login</button>
-
-        <div class="text-center register-link">
-          <p>Don't have an account? <a href="/register/">Register here</a></p>
-        </div>
+        <span>Please create your account to start shopping</span>
+        <input type="text" name="first_name" placeholder="First Name" required />
+        <input type="text" name="last_name" placeholder="Last Name" />
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Sign Up</button>
       </form>
     </div>
-  </div>
 
+    <!-- Sign-In -->
+    <div class="form-container sign-in">
+      <h5 style="font-size: 35px;">ECOMMERCE</h5>
+      <form method="post" action="{% url 'cart:login_page' %}">
+        {% csrf_token %}
+        <h2>Sign In</h2>
+        {% if messages %}
+        <div class="alert">
+          {% for message in messages %}{{ message }}{% endfor %}
+        </div>
+        {% endif %}
+        <div class="social-icon">
+          <a href="#"><i class="fab fa-google"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <span>Use your account credentials</span>
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <a href="#">Forgot your password?</a>
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
+
+    <!-- Toggle Panel -->
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-left">
+          <h1>Welcome to Ecommerce</h1>
+          <p>To keep connected with us, please sign up with your personal details. We're here 24x7.</p>
+          <button class="hidden" id="login">Sign In</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>Welcome User</h1>
+          <p>Thanks for joining us. We’re glad to see you again!</p>
+          <button class="hidden" id="register">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toggle Script -->
+  <script>
+    const container = document.getElementById("container");
+    document.getElementById("register").onclick = () => container.classList.add("active");
+    document.getElementById("login").onclick = () => container.classList.remove("active");
+  </script>
 </body>
 </html>
