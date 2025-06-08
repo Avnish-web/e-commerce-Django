@@ -5,17 +5,6 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-from django.http import JsonResponse
-import json
-
-
-from django.shortcuts import render, redirect
-from .models import CartItem
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-
-
-
 # Create your views here.
 @login_required(login_url='/login/')
 def product_list(request):
@@ -99,53 +88,3 @@ def register_page(request):
 def signout(request):
   logout(request)
   return redirect("/login/")
-
- 
-#..............................new features...........................
-@csrf_exempt
-@login_required(login_url='/login/')
-def update_quantity(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            item_id = data.get('id')
-            action = data.get('action')
-
-            cart_item = CartItem.objects.get(id=item_id, user=request.user)
-
-            if action == 'increase':
-                cart_item.quantity += 1
-            elif action == 'decrease' and cart_item.quantity > 1:
-                cart_item.quantity -= 1
-            elif action == 'decrease':
-                cart_item.delete()
-                return JsonResponse({'success': True, 'removed': True})
-
-            cart_item.save()
-
-            updated_total = sum(
-                item.product.price * item.quantity for item in CartItem.objects.filter(user=request.user)
-            )
-
-            return JsonResponse({'success': True, 'new_quantity': cart_item.quantity, 'updated_total': updated_total})
-
-        except Exception as e:
-            return JsonResponse({'success': False, 'error': str(e)})
-    return JsonResponse({'success': False, 'error': 'Invalid method'})
-
-
-@login_required
-def place_order(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-
-    if not cart_items.exists():
-        messages.error(request, "Your cart is empty.")
-        return redirect('cart:cart_view')  # Replace with your cart page name
-
-    # You can add order creation logic here later (e.g., create Order, OrderItem models)
-
-    # Clear the cart
-    cart_items.delete()
-
-    messages.success(request, "Your order has been placed successfully!")
-    return redirect('cart:cart_view')  # Redirect to cart or order summary
