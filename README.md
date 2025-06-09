@@ -83,8 +83,5 @@ Project Maintainer: Avnish – [com.avnish@gmail.com]
 
 LinkedIn: [https://www.linkedin.com/in/avneesh-sharma-1423b2270?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app]
 
-Tips & Next Steps
-Add a live demo link if deployed
-
 Thanks and Regards
 Avneesh Sharma
