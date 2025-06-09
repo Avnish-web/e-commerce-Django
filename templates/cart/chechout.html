@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart | Ecommerce</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <style>
+    body {
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .cart-container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card {
+      background: #f9f9f9;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-image {
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .qty-control {
+      width: 50px;
+    }
+
+    .total-section {
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .btn-lg {
+      font-size: 1.1rem;
+      padding: 10px 24px;
+      border-radius: 50px;
+    }
+
+    .action-links a {
+      margin-right: 15px;
+    }
+
+    @media (max-width: 576px) {
+      .qty-control {
+        width: 40px;
+      }
+
+      .btn-lg {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5 cart-container">
+  <h3 class="mb-4 font-weight-bold">🛒 Your Shopping Cart</h3>
+  <p class="mb-4">Welcome back, <strong>{{ request.user }}</strong>!</p>
+
+  {% csrf_token %}
+  <div class="row">
+    {% for item in cart_items %}
+    <div class="col-md-4 mb-4 d-flex">
+      <div class="product-card p-3 w-100">
+        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid product-image" />
+        <div class="text-center">
+          <h5 class="mb-2">{{ item.product.name }}</h5>
+          <div class="d-flex justify-content-center align-items-center mb-2">
+            <button class="btn btn-outline-dark btn-sm qty-btn" data-action="decrease" data-id="{{ item.id }}">−</button>
+            <input type="text" class="form-control text-center mx-2 qty-control" id="qty-{{ item.id }}" value="{{ item.quantity }}" readonly />
+            <button class="btn btn-outline-dark btn-sm qty-btn" data-action="increase" data-id="{{ item.id }}">+</button>
+          </div>
+          <p class="mb-0 text-muted">₹{{ item.product.price }}</p>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+      <div class="alert alert-info text-center">Your cart is empty. Start shopping!</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mt-4 action-links flex-wrap">
+    <div>
+      <a href="{% url 'cart:product_list' %}" class="btn btn-outline-success">← Continue Shopping</a>
+      <a href="{% url 'logout' %}" class="btn btn-outline-secondary">Logout</a>
+    </div>
+    <div class="total-section text-right">
+      <h5 class="mb-2">Total: ₹<span id="total">{{ total_price }}</span></h5>
+      <form action="{% url 'cart:place_order' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success btn-lg">Place Order</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script defer>
+  document.addEventListener('DOMContentLoaded', () => {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    document.querySelectorAll('.qty-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const itemId = btn.dataset.id;
+        const action = btn.dataset.action;
+
+        try {
+          const res = await fetch(`/update_quantity/${itemId}/`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({ action })
+          });
+
+          const data = await res.json();
+          if (data.success) {
+            if (data.removed) {
+              location.reload();
+            } else {
+              document.getElementById(`qty-${itemId}`).value = data.new_quantity;
+              document.getElementById("total").textContent = data.updated_total;
+            }
+          }
+        } catch (err) {
+          console.error("Error updating quantity:", err);
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

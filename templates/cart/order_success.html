@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Successful</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div class="container text-center mt-5">
+    <h1 class="text-success">🎉 Order Placed Successfully!</h1>
+    <p>Thank you for ordering <strong>{{ product.name }}</strong>.</p>
+    <p>We will ship it to your address soon.</p>
+    <a href="{% url 'cart/index.html' %}" class="btn btn-primary mt-3">Back to Products</a>
+  </div>
+</body>
+</html>

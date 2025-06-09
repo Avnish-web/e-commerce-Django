@@ -239,7 +239,6 @@
 </head>
 <body>
   <main class="container" id="container">
-    <!-- Sign-Up -->
     <div class="form-container sign-up">
       <form method="post" action="{% url 'cart:register' %}" enctype="multipart/form-data">
         {% csrf_token %}
@@ -265,7 +264,6 @@
       </form>
     </div>
 
-    <!-- Sign-In -->
     <div class="form-container sign-in">
       <h5 style="font-size: 35px;">ECOMMERCE</h5>
       <form method="post" action="{% url 'cart:login_page' %}">
@@ -283,7 +281,9 @@
           <a href="#"><i class="fab fa-linkedin-in"></i></a>
           <a href="#"><i class="fab fa-whatsapp"></i></a>
         </div>
+        
         <span>Use your account credentials</span>
+        {% csrf_token %}
         <input type="text" name="username" placeholder="Username" required />
         <input type="password" name="password" placeholder="Password" required />
         <a href="#">Forgot your password?</a>
@@ -291,7 +291,6 @@
       </form>
     </div>
 
-    <!-- Toggle Panel -->
     <div class="toggle-container">
       <div class="toggle">
         <div class="toggle-panel toggle-left">
@@ -308,7 +307,6 @@
     </div>
   </main>
 
-  <!-- Toggle Script -->
   <script>
     const container = document.getElementById("container");
     document.getElementById("register").onclick = () => container.classList.add("active");
