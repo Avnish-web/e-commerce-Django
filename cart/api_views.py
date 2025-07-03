@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.urls import reverse
-from paypal.standard.forms import PayPalPaymentsForm
+#from paypal.standard.forms import PayPalPaymentsForm
 from django.http import JsonResponse
 
 def payment_process(request):
@@ -16,8 +16,8 @@ def payment_process(request):
         'return_url': f'http://{host}{reverse("payment_done")}',
         'cancel_return': f'http://{host}{reverse("payment_canceled")}',
     }
-    form = PayPalPaymentsForm(initial=paypal_dict)
-    return render(request, 'pets/payment_process.html', {'form': form})
+    #form = PayPalPaymentsForm(initial=paypal_dict)
+    return render(request, 'pets/payment_process.html', {})
 
 def example_api(request):
     return JsonResponse({'status': 'working'})
