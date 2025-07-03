@@ -1,4 +1,4 @@
-from django.conf import settings
+'''from django.conf import settings
 from django.shortcuts import render
 from django.urls import reverse
 #from paypal.standard.forms import PayPalPaymentsForm
@@ -21,3 +21,4 @@ def payment_process(request):
 
 def example_api(request):
     return JsonResponse({'status': 'working'})
+'''
