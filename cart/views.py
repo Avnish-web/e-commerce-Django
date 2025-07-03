@@ -26,7 +26,7 @@ def payment_process(request):
         'cancel_return': f'http://{host}{reverse("payment_canceled")}',
     }
     #form = PayPalPaymentsForm(initial=paypal_dict)
-    return render(request, 'pets/payment_process.html', {})
+    return render(request, 'pets/payment_process.html', {'form':form})
 
 @login_required
 def buy_now(request, product_id):
