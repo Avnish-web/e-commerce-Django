@@ -1,3 +1,2 @@
-winget install python 
-pip install django 
-pip install paypal
+Pillow>=9.0
+stripe>=5.0
