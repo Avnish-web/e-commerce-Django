@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from cart import views as cart_views
 from django.views.generic import TemplateView
-from paypal.standard.ipn import urls as paypal_urls
+#from paypal.standard.ipn import urls as paypal_urls
 from cart import api_views  # Ensure this exists
 from cart.api_views import example_api
 
