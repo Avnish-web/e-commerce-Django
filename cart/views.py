@@ -10,7 +10,7 @@ from django.conf import settings
 import json
 
 from .models import Product, CartItem, Order
-from paypal.standard.forms import PayPalPaymentsForm
+#from paypal.standard.forms import PayPalPaymentsForm
 
 
 def payment_process(request):
@@ -25,8 +25,8 @@ def payment_process(request):
         'return_url': f'http://{host}{reverse("payment_done")}',
         'cancel_return': f'http://{host}{reverse("payment_canceled")}',
     }
-    form = PayPalPaymentsForm(initial=paypal_dict)
-    return render(request, 'pets/payment_process.html', {'form': form})
+    #form = PayPalPaymentsForm(initial=paypal_dict)
+    return render(request, 'pets/payment_process.html', {})
 
 @login_required
 def buy_now(request, product_id):
