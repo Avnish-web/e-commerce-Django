@@ -13,7 +13,7 @@ from .models import Product, CartItem, Order
 #from paypal.standard.forms import PayPalPaymentsForm
 
 
-def payment_process(request):
+'''def payment_process(request):
     host = request.get_host()
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
@@ -27,7 +27,7 @@ def payment_process(request):
     }
     #form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'pets/payment_process.html', {})
-
+'''
 @login_required
 def buy_now(request, product_id):
     product = get_object_or_404(Product, id=product_id)
