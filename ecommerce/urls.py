@@ -18,7 +18,7 @@ urlpatterns = [
     path('register/', cart_views.register_page, name='register'),
     path('cart/', include('cart.urls', namespace='cart')),
     path('logout/', cart_views.signout, name='logout'),
-    path('paypal/', include(paypal_urls)),
+    #path('paypal/', include(paypal_urls)),
     path('payment_process/', api_views.payment_process, name='payment_process'),
     path('payment_done/', TemplateView.as_view(template_name="pets/payment_done.html"), name='payment_done'),
     path('payment_canceled/', TemplateView.as_view(template_name="pets/payment_canceled.html"), name='payment_canceled'),
