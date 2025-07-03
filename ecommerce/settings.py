@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cart',  #first we have to add our app into installed_apps
-     'paypal.standard.ipn',
+     #'paypal.standard.ipn',
 ]
 
-PAYPAL_RECEIVER_EMAIL = 'XXXXX'
-PAYPAL_TEST = True
+#PAYPAL_RECEIVER_EMAIL = 'XXXXX'
+#PAYPAL_TEST = True
 
 
 
