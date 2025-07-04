@@ -1,9 +1,9 @@
-'''from django.conf import settings
+from django.conf import settings
 from django.shortcuts import render
 from django.urls import reverse
 #from paypal.standard.forms import PayPalPaymentsForm
 from django.http import JsonResponse
-
+'''
 def payment_process(request):
     host = request.get_host()
     paypal_dict = {
