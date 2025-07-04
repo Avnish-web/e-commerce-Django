@@ -3,6 +3,6 @@ psycopg2-binary
 pillow
 django-crispy-forms
 paypalrestsdk
-python-decouple
 django-countries
+python-decouple
 django-allauth
