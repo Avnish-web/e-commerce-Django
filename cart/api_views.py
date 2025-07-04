@@ -18,7 +18,7 @@ def payment_process(request):
     }
     #form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'pets/payment_process.html', {})
-'''
+
 def example_api(request):
     return JsonResponse({'status': 'working'})
 
