@@ -28,20 +28,18 @@ This is a full-stack e-commerce web application built with Django, designed for 
 
 ---
 
-## 📁 Project Structure
+| Name                   | Description                               |
+| ---------------------- | ----------------------------------------- |
+| `e-commerce-Django/`   | Root project directory                    |
+| ├── `ecommerce/`       | Django project settings and configuration |
+| ├── `cart/`            | Django app: views, models, URLs, logic    |
+| ├── `templates/cart/`  | HTML templates for frontend rendering     |
+| ├── `media/products/`  | Uploaded product images                   |
+| ├── `db.sqlite3`       | Default SQLite database                   |
+| ├── `Dockerfile`       | Docker configuration (optional)           |
+| ├── `manage.py`        | Django project management script          |
+| └── `requirements.txt` | Python dependencies file                  |
 
-| Name                   | Means                                     |
-|------------------------|-------------------------------------------|
-| e‑commerce‑Django/                                                 |
-| ├── ecommerce/         | # Django project settings                 |
-| ├── store/             | # App containing models, views, URLs      |
-| ├── templates/         | # HTML templates                          |
-| ├── static/            | # CSS, JS, image files                    |
-| ├── media/             | # Uploaded product images                 |
-| ├── db.sqlite3         | # Default database                        |
-| ├── Dockerfile         | # Optional container configuration        |
-| ├── manage.py          |                                           |
-| └── requirements.txt   |                                           |
 
 ---
 
