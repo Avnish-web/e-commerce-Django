@@ -80,7 +80,6 @@ e‑commerce‑Django/
 
 To access the admin panel:
 
-      ```bash
       python manage.py createsuperuser
 
 # Enter your username, email, and password when prompted
