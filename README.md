@@ -29,8 +29,16 @@ This is a full-stack e-commerce web application built with Django, designed for 
 ---
 
 ## 📁 Project Structure
-
-e-commerce-Django/ ├── ecommerce/         # Main project settings ├── store/             # App containing models, views, urls ├── templates/         # HTML templates ├── static/            # CSS, JS, Images ├── db.sqlite3         # Database └── manage.py
+e‑commerce‑Django/
+├── ecommerce/          # Django project settings
+├── store/              # App containing models, views, URLs
+├── templates/          # HTML templates
+├── static/             # CSS, JS, image files
+├── media/              # Uploaded product images
+├── db.sqlite3          # Default database
+├── Dockerfile          # Optional container configuration
+├── manage.py
+└── requirements.txt
 
 ---
 
@@ -42,24 +50,25 @@ e-commerce-Django/ ├── ecommerce/         # Main project settings ├─�
    cd e-commerce-Django
 
 2. Create and activate a virtual environment:
-
+ ```bash
 python -m venv venv
 source venv/bin/activate     # For Linux/macOS
 venv\Scripts\activate        # For Windows
 
+---
 
 3. Install dependencies:
-
+ ```bash
 pip install -r requirements.txt
 
 
 4. Run database migrations:
-
+ ```bash
 python manage.py migrate
 
 
 5. Start the development server:
-
+ ```bash
 python manage.py runserver
 
 
