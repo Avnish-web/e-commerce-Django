@@ -31,6 +31,7 @@ This is a full-stack e-commerce web application built with Django, designed for 
 ## 📁 Project Structure
 
 | Name                   | Means                                     |
+|------------------------|-------------------------------------------|
 | e‑commerce‑Django/                                                 |
 | ├── ecommerce/         | # Django project settings                 |
 | ├── store/             | # App containing models, views, URLs      |
