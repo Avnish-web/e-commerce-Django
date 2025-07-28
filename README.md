@@ -50,26 +50,26 @@ e‑commerce‑Django/
    cd e-commerce-Django
 
 2. Create and activate a virtual environment:
- ```bash
-python -m venv venv
-source venv/bin/activate     # For Linux/macOS
-venv\Scripts\activate        # For Windows
+   ```bash
+   python -m venv venv
+   source venv/bin/activate     # For Linux/macOS
+   venv\Scripts\activate        # For Windows
 
 ---
 
 3. Install dependencies:
- ```bash
-pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
 
 
 4. Run database migrations:
- ```bash
-python manage.py migrate
+   ```bash
+   python manage.py migrate
 
 
 5. Start the development server:
- ```bash
-python manage.py runserver
+   ```bash
+   python manage.py runserver
 
 
 
